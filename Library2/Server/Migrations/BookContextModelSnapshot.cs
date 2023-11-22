@@ -30,7 +30,8 @@ namespace Library2.Server.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("PublisDate")
+                    b.Property<DateTime?>("PublisDate")
+                        .IsRequired()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Publisher")
@@ -57,7 +58,8 @@ namespace Library2.Server.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<DateTime>("BirthDate")
+                    b.Property<DateTime?>("BirthDate")
+                        .IsRequired()
                         .HasColumnType("datetime(6)");
 
                     b.Property<string>("Name")
@@ -67,6 +69,23 @@ namespace Library2.Server.Migrations
                     b.HasKey("Reader_number");
 
                     b.ToTable("ReaderList", (string)null);
+                });
+
+            modelBuilder.Entity("Library2.Shared.Rental", b =>
+                {
+                    b.Property<int>("Inventory_number")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Reader_number")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("RentDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime>("ReturnDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.ToTable("RentalList", (string)null);
                 });
 #pragma warning restore 612, 618
         }

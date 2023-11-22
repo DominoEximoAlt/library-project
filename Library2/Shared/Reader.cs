@@ -18,4 +18,5 @@ public class Reader
     [Required]
     [Range(typeof(DateTime), "1900-01-01","3000-12-31")]
     public DateTime? BirthDate { get; set; }
+    
 }
