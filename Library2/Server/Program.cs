@@ -18,6 +18,7 @@ builder.Services.AddDbContext<BookContext>(options =>
 
 builder.Services.AddScoped<IBookService, BookService>();
 builder.Services.AddScoped<IReaderService, ReaderService>();
+builder.Services.AddScoped<IRentalService, RentalService>();
 
 
 builder.Services.AddEndpointsApiExplorer();

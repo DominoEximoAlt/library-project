@@ -16,6 +16,8 @@ public class BookContext : DbContext
 
     public virtual DbSet<Reader> Readers { get; set; }
 
+    public virtual DbSet<Rental> Rents { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
          
@@ -35,13 +37,11 @@ public class BookContext : DbContext
 
         modelBuilder.Entity<Rental>(entity =>
         {
-            entity.HasOne(e => e.RentedBook)
-                .WithOne()
-                .HasForeignKey<Book>(e => e.Inventory_number)
-                .IsRequired();
-            entity.HasOne<Reader>(e => e.Reader).WithOne().HasForeignKey<Reader>(e => e.Reader_number);
             entity.ToTable("RentalList");
-            entity.HasNoKey();
+            entity.HasOne(e => e.Reader).WithOne().HasForeignKey<Reader>(r => r.Reader_number).OnDelete(DeleteBehavior.NoAction);
+            entity.HasOne(e => e.Book).WithOne().HasForeignKey<Book>(r => r.Inventory_number).OnDelete(DeleteBehavior.NoAction);
+            entity.Property(e => e.RentalId).HasColumnName("identity");
+            entity.HasKey(r => r.RentalId);
         });
     }
 }
