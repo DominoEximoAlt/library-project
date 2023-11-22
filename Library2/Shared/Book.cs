@@ -7,13 +7,16 @@ public class Book
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int inventory_number { get; set; }
+    public int Inventory_number { get; set; }
+    
+    [Required]
+    public string Title { get; set; }
 
-    public string title { get; set; }
+    [Required]
+    public string Author { get; set; }
 
-    public string author { get; set; }
-
-    public string publisher { get; set; }
+    [Required]
+    public string Publisher { get; set; }
     
     
 }
