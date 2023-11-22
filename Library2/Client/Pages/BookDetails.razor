@@ -1,0 +1,57 @@
+@page "/details/{inventory_number:int}"
+@using Library2.Shared
+@using Library2.Client.Services
+@inject IBookService BookService
+@inject NavigationManager NavigationManager
+
+
+@if (Book is not null)
+{
+    <h3>@Book.Title's Details</h3>
+             
+    <BookForm Book="Book" ButtonTitle="Update Person" OnValidSubmit="UpdateBook" />
+    
+    <button class="btn btn-danger form-control mt-3" @onclick="DeleteBook">Delete Book</button>
+}
+else if (!_isFound)
+{
+    <p>Book with id '@Inventory_number' is not found!</p>
+}
+else
+{
+    <p>Loading...</p>
+}
+
+@code {
+    
+    private bool _isFound = true;
+    
+    [Parameter]
+    public int Inventory_number { get; set; }
+
+    private Book? Book { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        try
+        {
+            Book = await BookService.GetBookByIdAsync(Inventory_number);
+        }
+        catch
+        {
+            _isFound = false;
+        }
+    }
+
+    private async Task UpdateBook()
+    {
+        await BookService.UpdateBookAsync(Inventory_number, Book);
+        NavigationManager.NavigateTo("list");
+    }
+
+    private async Task DeleteBook()
+    {
+        await BookService.DeleteBookAsync(Inventory_number);
+        NavigationManager.NavigateTo("list");
+    }
+}

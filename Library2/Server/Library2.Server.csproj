@@ -15,10 +15,10 @@
         <PackageReference Include="MySql.EntityFrameworkCore" Version="7.0.0" />
         <PackageReference Include="MySqlConnector" Version="2.3.0" />
         <PackageReference Include="MySqlConnector.DependencyInjection" Version="2.3.0" />
+        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Client\Library2.Client.csproj"/>
         <ProjectReference Include="..\Shared\Library2.Shared.csproj"/>
     </ItemGroup>
 

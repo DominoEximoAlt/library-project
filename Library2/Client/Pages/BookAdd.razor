@@ -1,0 +1,19 @@
+@page "/add"
+@using Library2.Client.Services
+@using Library2.Shared
+@inject IBookService BookService
+@inject NavigationManager NavigationManager
+
+<h3>Add Book</h3>
+
+<BookForm Book="Book" ButtonTitle="Add Book" OnValidSubmit="AddBook" />
+
+@code {
+    private Book Book { get; set; } = new();
+
+    private async Task AddBook  ()
+    {
+        await BookService.AddBookAsync(Book);
+        NavigationManager.NavigateTo("list");
+    }
+}
