@@ -1,4 +1,9 @@
+using Library2.Server.Context;
+using Library2.Server.Services;
+using Library2.Server.Services.Implementation;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using MySqlConnector;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -6,8 +11,15 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllersWithViews();
-builder.Services.AddRazorPages();
-builder.Services.AddMySqlDataSource(builder.Configuration.GetConnectionString("Default")!);
+builder.Services.AddRazorPages(); 
+builder.Services.AddDbContext<BookContext>(options =>
+    {
+        options.UseMySQL(builder.Configuration.GetConnectionString("Default"));
+    }
+);
+
+builder.Services.AddScoped<IBookService, BookService>();
+
 
 var app = builder.Build();
 

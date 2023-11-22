@@ -55,6 +55,7 @@ public class BookService : IBookService
         existingBook.Author = newBook.Author;
         existingBook.Publisher = newBook.Publisher;
         existingBook.Title = newBook.Title;
+        existingBook.PublisDate = newBook.PublisDate;
         
         _logger.LogInformation("Book UpdateDataOperation. Book: {@Book}",existingBook);
         await _bookContext.SaveChangesAsync();

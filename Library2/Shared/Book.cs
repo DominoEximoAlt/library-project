@@ -18,5 +18,8 @@ public class Book
     [Required]
     public string Publisher { get; set; }
     
-    
+    [Required]
+    public DateTime PublisDate { get; set; }
+
+
 }
