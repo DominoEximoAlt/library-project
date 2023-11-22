@@ -1,10 +1,8 @@
 using Library2.Server.Context;
 using Library2.Server.Services;
 using Library2.Server.Services.Implementation;
-using Microsoft.AspNetCore.ResponseCompression;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
-using MySqlConnector;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,6 +17,7 @@ builder.Services.AddDbContext<BookContext>(options =>
 );
 
 builder.Services.AddScoped<IBookService, BookService>();
+builder.Services.AddScoped<IReaderService, ReaderService>();
 
 
 builder.Services.AddEndpointsApiExplorer();

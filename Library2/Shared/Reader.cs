@@ -3,23 +3,19 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Library2.Shared;
 
-public class Book
+public class Reader
 {
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-    public int Inventory_number { get; set; }
+    public int Reader_number { get; set; }
     
     [Required]
-    public string Title { get; set; }
+    public string Name { get; set; }
 
     [Required]
-    public string Author { get; set; }
-
-    [Required]
-    public string Publisher { get; set; }
+    public string Address { get; set; }
     
     [Required]
-    public DateTime? PublisDate { get; set; }
-
-
+    [Range(typeof(DateTime), "1900-01-01","3000-12-31")]
+    public DateTime? BirthDate { get; set; }
 }

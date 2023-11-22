@@ -45,6 +45,29 @@ namespace Library2.Server.Migrations
 
                     b.ToTable("BookList", (string)null);
                 });
+
+            modelBuilder.Entity("Library2.Shared.Reader", b =>
+                {
+                    b.Property<int>("Reader_number")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("identity");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime>("BirthDate")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("longtext");
+
+                    b.HasKey("Reader_number");
+
+                    b.ToTable("ReaderList", (string)null);
+                });
 #pragma warning restore 612, 618
         }
     }

@@ -1,0 +1,21 @@
+@page "/readerAdd"
+@using Library2.Client.Services
+@using Library2.Shared
+@inject IReaderService ReaderService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Add Reader</PageTitle>
+
+<h3>Add Reader</h3>
+
+<ReaderForm Reader="Reader" ButtonTitle="Add Reader" OnValidSubmit="AddReader" />
+
+@code {
+    private Reader Reader { get; set; } = new();
+
+    private async Task AddReader  ()
+    {
+        await ReaderService.AddReaderAsync(Reader);
+        NavigationManager.NavigateTo("readerList");
+    }
+}
