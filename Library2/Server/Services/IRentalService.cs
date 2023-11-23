@@ -11,6 +11,8 @@ public interface IRentalService
     Task<Rental> Get(int rentalId);
 
     Task<IEnumerable<Rental>> Get();
+    
+    Task<IEnumerable<Rental>> GetByReader(int reader_number);
 
   
 }

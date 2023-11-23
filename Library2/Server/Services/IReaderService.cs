@@ -13,4 +13,6 @@ public interface IReaderService
     Task<IEnumerable<Reader>> Get();
 
     Task Update(Reader reader);
+
+    Task SetRental(Rental rental);
 }

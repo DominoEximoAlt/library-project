@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Runtime.InteropServices.JavaScript;
 using Library2.Server.Context;
 using Library2.Shared;
@@ -52,5 +53,17 @@ public class RentalService : IRentalService
         return rental;
     }
 
-    
+    public async Task<IEnumerable<Rental>> GetByReader(int reader_number)
+    {
+        
+        _logger.LogInformation("Currently rented books by {@Reader_number} retrived.",reader_number);
+        
+        var rentals = await _bookContext.Rents.ToListAsync();
+
+        var currentlyRented = rentals.Where(o => o.ReaderNumber.Equals(reader_number));
+
+        return currentlyRented;
+    }
+
+
 }

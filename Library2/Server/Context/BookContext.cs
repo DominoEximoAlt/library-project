@@ -26,6 +26,7 @@ public class BookContext : DbContext
             entity.ToTable("BookList");
             entity.Property(e => e.Inventory_number).HasColumnName("identity");
             entity.HasKey(b => b.Inventory_number);
+            entity.HasOne(e => e.Rental).WithOne(r => r.Book).HasForeignKey<Rental>(b =>b.InventoryNumber).OnDelete(DeleteBehavior.SetNull);
         });
 
         modelBuilder.Entity<Reader>(entity =>
@@ -33,15 +34,15 @@ public class BookContext : DbContext
             entity.ToTable("ReaderList");
             entity.Property(e => e.Reader_number).HasColumnName("identity");
             entity.HasKey(b => b.Reader_number);
+            entity.HasOne(e => e.Rental).WithOne(r => r.Reader).HasForeignKey<Rental>(b =>b.ReaderNumber).OnDelete(DeleteBehavior.SetNull);
         });
 
         modelBuilder.Entity<Rental>(entity =>
         {
             entity.ToTable("RentalList");
-            entity.HasOne(e => e.Reader).WithOne().HasForeignKey<Reader>(r => r.Reader_number).OnDelete(DeleteBehavior.NoAction);
-            entity.HasOne(e => e.Book).WithOne().HasForeignKey<Book>(r => r.Inventory_number).OnDelete(DeleteBehavior.NoAction);
-            entity.Property(e => e.RentalId).HasColumnName("identity");
-            entity.HasKey(r => r.RentalId);
+            
+            entity.Property(e => e.RentalId).HasColumnName("id");
+            entity.HasKey(e => e.RentalId);
         });
     }
 }

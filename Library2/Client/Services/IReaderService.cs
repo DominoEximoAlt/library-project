@@ -12,5 +12,6 @@ public interface IReaderService
   
     Task DeleteReaderAsync(int reader_number);  
   
-    Task AddReaderAsync(Reader reader);  
+    Task AddReaderAsync(Reader reader);
+    Task AddRental(Rental rental);
 }

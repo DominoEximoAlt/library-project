@@ -84,4 +84,20 @@ public class ReaderController : ControllerBase
 
         return Ok();
     }
+    [HttpPut()]
+    public async Task<IActionResult> AddRental( [FromBody] Rental rental)
+    {
+        
+
+        var existingReader = await _readerService.Get(rental.ReaderNumber);
+
+        if (existingReader is null)
+        {
+            return NotFound();
+        }
+
+        await _readerService.SetRental(rental);
+
+        return Ok();
+    }
 }

@@ -1,0 +1,25 @@
+@page "/addRental"
+@using Library2.Client.Services
+@using Library2.Shared
+@inject IRentalService RentalService
+@inject IReaderService ReaderService
+@inject NavigationManager NavigationManager
+
+<PageTitle>Add Book</PageTitle>
+<h3>Add Book</h3>
+
+<RentalForm Rental="Rental" ButtonTitle="Add Book" OnValidSubmit="AddRental" />
+
+@code {
+    private Rental Rental { get; set; } = new();
+    
+    private async Task AddRental  ()
+    {
+
+        await ReaderService.AddRental(Rental);
+        await RentalService.AddRentalAsync(Rental);
+       
+        NavigationManager.NavigateTo("RentalList");
+    }
+    
+}

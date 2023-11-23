@@ -26,4 +26,7 @@ public class ReaderService : IReaderService
   
     public Task AddReaderAsync(Reader reader) =>
         _httpClient.PostAsJsonAsync("Reader",reader);  
+    
+    public Task AddRental( Rental rental) =>
+        _httpClient.PutAsJsonAsync($"Reader/{rental.ReaderNumber}",rental);  
 }

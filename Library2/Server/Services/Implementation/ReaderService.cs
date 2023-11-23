@@ -54,7 +54,14 @@ public class ReaderService : IReaderService
         existingReader.Name = newReader.Name;
         existingReader.Address = newReader.Address;
         existingReader.BirthDate = newReader.BirthDate;
-        
+        existingReader.Rental = newReader.Rental;
+        _logger.LogInformation("Reader UpdateDataOperation. Reader: {@Reader}",existingReader);
+        await _bookContext.SaveChangesAsync();
+    }
+    public async Task SetRental(Rental rental)
+    {
+        var existingReader = await _bookContext.Readers.FindAsync(rental.ReaderNumber);
+        existingReader.Rental = rental;
         _logger.LogInformation("Reader UpdateDataOperation. Reader: {@Reader}",existingReader);
         await _bookContext.SaveChangesAsync();
     }

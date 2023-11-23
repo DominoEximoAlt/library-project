@@ -1,0 +1,72 @@
+@using Library2.Shared
+@using System.Numerics
+@using Library2.Client.Services
+@inject IBookService BookService
+@inject IReaderService ReaderService
+<EditForm Model="Rental" OnValidSubmit="OnValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    
+    
+    <div class="mb-3">
+        <label class="form-label">Book</label>
+        <select @bind="Rental.InventoryNumber" class="form-control">
+                    @if (Books != null)
+                    {
+                        @foreach (var book in Books)
+                        {
+                            <option value="@book.Inventory_number">@book.Title</option>
+                        }
+                    }
+            </select>
+        <ValidationMessage For="() => Rental.ReaderNumber"/>
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Reader</label>
+        <select @bind="Rental.ReaderNumber" class="form-control">
+                            @if (Readers != null)
+                            {
+                                @foreach (var reader in Readers)
+                                {
+                                    <option value="@reader.Reader_number">@reader.Name</option>
+                                }
+                            }
+                    </select>
+        <ValidationMessage For="() => Rental.ReaderNumber" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Rent Date</label>
+        <InputDate  @bind-Value="Rental.RentDate" class="form-control"/>
+        <ValidationMessage For="() => Rental.RentDate" />
+    </div>
+    <div class="mb-3">
+        <label class="form-label">Return Date</label>
+        <InputDate @bind-Value="Rental.ReturnDate" class="form-control"/>
+        <ValidationMessage For="() => Rental.ReturnDate" />
+     </div>
+
+    <button type="submit" class="btn btn-primary form-control">@ButtonTitle</button>
+</EditForm>
+
+@code {
+    [Parameter]
+    public Rental Rental { get; set; }
+    
+    [Parameter]
+    public string ButtonTitle { get; set; }
+    
+    [Parameter]
+    public Func<Task> OnValidSubmit { get; set; }
+    
+    private IEnumerable<Book>? Books { get; set; }
+    private IEnumerable<Reader>? Readers { get; set; }
+    
+    protected override async Task OnInitializedAsync()
+    {
+        
+        Books = await BookService.GetBooksAsync();
+        Readers = await ReaderService.GetReadersAsync();
+
+
+    }
+}

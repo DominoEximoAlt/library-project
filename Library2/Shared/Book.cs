@@ -21,7 +21,7 @@ public class Book
     [Required]
     public DateTime? PublisDate { get; set; }
 
-    
+    public Rental? Rental { get; set; }
 
 
 

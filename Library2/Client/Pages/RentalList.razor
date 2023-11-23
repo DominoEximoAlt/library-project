@@ -1,0 +1,65 @@
+@page "/RentalList"
+@using Library2.Client.Services
+@using Library2.Shared
+@inject IRentalService RentalService
+@inject IReaderService ReaderService
+@inject IBookService BookService
+
+<PageTitle>Rental List</PageTitle>
+
+@if (Rentals is not null)
+{
+    <table class="table table-hover table-bordered">
+        <thead>
+        <th>Reader</th>
+        <th>Book</th>
+        <th>Rent Date</th>
+        <th>Return Date</th>
+        <th></th>
+        </thead>
+        <tbody>
+        @foreach (var rental in Rentals)
+        {
+            <tr>
+                <td>
+                    @names[rental.ReaderNumber]
+                </td>
+                <td>@books[rental.InventoryNumber]</td>
+                <td>@rental.RentDate</td>
+                <td>@rental.ReturnDate</td>
+            </tr>
+        }
+        </tbody>
+    </table>
+}
+
+
+@code
+{
+    private IEnumerable<Rental>? Rentals { get; set; }
+
+    private IEnumerable<Reader>? Readers { get; set; }
+
+    private IEnumerable<Book>? Books { get; set; }
+
+    private Dictionary<int, string> names =
+        new Dictionary<int, string>();
+    private Dictionary<int, string> books =
+        new Dictionary<int, string>();
+
+    protected override async Task OnInitializedAsync()
+    {
+        Rentals = await RentalService.GetRentalsAsync();
+        Readers = await ReaderService.GetReadersAsync();
+        Books = await BookService.GetBooksAsync();
+        foreach (var reader in Readers)
+        {
+            names.Add(reader.Reader_number,reader.Name);
+        }
+        foreach (var book in Books)
+        {
+            books.Add(book.Inventory_number,book.Title);
+        }
+        
+    }
+}
