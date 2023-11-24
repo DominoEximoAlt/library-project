@@ -6,6 +6,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library2.Client", "Library2
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library2.Shared", "Library2\Shared\Library2.Shared.csproj", "{EBEC3BEA-F130-4A01-BA59-FFB5E4B32BF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryServerTest", "LibraryServerTest\LibraryServerTest.csproj", "{D9D25CD7-25F8-486D-BFB1-430B3E7DB3EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,5 +26,9 @@ Global
 		{EBEC3BEA-F130-4A01-BA59-FFB5E4B32BF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBEC3BEA-F130-4A01-BA59-FFB5E4B32BF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBEC3BEA-F130-4A01-BA59-FFB5E4B32BF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D9D25CD7-25F8-486D-BFB1-430B3E7DB3EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D9D25CD7-25F8-486D-BFB1-430B3E7DB3EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D9D25CD7-25F8-486D-BFB1-430B3E7DB3EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D9D25CD7-25F8-486D-BFB1-430B3E7DB3EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

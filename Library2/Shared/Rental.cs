@@ -9,8 +9,9 @@ public class Rental
     [Key]
     [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int RentalId { get; set; } 
+    [Required]
     public int ReaderNumber { get; set; } 
-    
+    [Required]
     public int InventoryNumber { get; set; }
 
     public Reader Reader;
